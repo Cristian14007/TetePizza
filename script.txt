@@ -1,0 +1,30 @@
+CREATE DATABASE TetePizzaDB;
+USE TetePizzaDB;
+CREATE TABLE Pizza (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(100) NOT NULL,
+    IsGlutenFree bit
+);
+
+Drop Table Pizza;
+INSERT INTO Pizza ( Name, IsGlutenFree)
+VALUES ( 'Classic Italian', 0);
+INSERT INTO Pizza ( Name, IsGlutenFree)
+VALUES ( 'Veggie', 1);
+SELECT * FROM 	Pizza;
+
+CREATE TABLE PizzaIngrediente (
+    PizzaId INT,
+    IngredienteId INT,
+    PRIMARY KEY (PizzaId, IngredienteId),
+    FOREIGN KEY (PizzaId) REFERENCES Pizza(Id),
+    FOREIGN KEY (IngredienteId) REFERENCES Ingrediente(Id)
+);
+CREATE TABLE Ingrediente (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(100) NOT NULL,
+    Origin NVARCHAR(255),
+    Stock INT,
+    Description NVARCHAR(MAX),
+    IsVegan BIT NOT NULL
+);
